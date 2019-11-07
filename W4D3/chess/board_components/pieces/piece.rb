@@ -8,6 +8,10 @@ class Piece
   def to_s  ### symbols are already strings
     self.symbol.to_s
   end
+  
+  def pos=(val)
+    @pos = val if board.valid_pos?(val)
+  end
 
   def moves
     '' ### no real moves, will be individual in class (generates array of moves)
@@ -17,6 +21,5 @@ class Piece
     '' ### overwrite in each class
   end
 
-  attr_reader :board, :color
-  attr_accessor :pos
+  attr_reader :board, :color, :pos
 end

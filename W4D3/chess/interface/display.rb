@@ -24,7 +24,7 @@ class Display
   end
   
   def render_color_board(cursor_pos)
-    board_graphics = board.display_symbol  ## 2D array of symbols (0..7)
+    board_graphics = board.graphics  ## 2D array of symbols (0..7)
   
     (0..7).each do |row|
       (0..7).each do |col|
