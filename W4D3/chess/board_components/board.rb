@@ -1,11 +1,14 @@
 require_relative "pieces"
 
 class Board
-  def initialize
+  def initialize(populate = true)  
+    ##populate to be a boolean method indicating whether if we only want @board space, or if we want to fill it with Pieces as well
+    ##needed to duplicate board (can't do it any other way, would only create 2D array)
+
     ### amend below so that board grid is generated first, before pieces are placed in as we need to pass board information to piece
     @board = Array.new(8) {Array.new(8) {nil} }
 
-    populate_board
+    populate_board if populate == true
   end
   
   attr_reader :board
@@ -20,7 +23,8 @@ class Board
     board[row][col] = val
   end
 
-  def pieces ###will hold the pieces in an Array so it's easier to search for king and for enemy moves
+  def pieces 
+    ###will hold the pieces in an Array so it's easier to search for king and for enemy moves
     pieces = []
 
     board.each do |row|
@@ -30,6 +34,41 @@ class Board
     end
 
     pieces
+  end
+
+  def duped 
+    ### need to initiate a new Board completely...shovelling into new array can only generate new object_id but not a board.class
+    ### fill board piece by piece with current layout
+    # failed attempt
+    # board.each do |row|
+    #   dup_row = []
+    
+    #   row.each do |piece|
+    #     dup_row << piece.class.new()
+    #   end
+    
+    #   duped << dup_row
+    # end
+
+    ### WORKED, checked object_id, moved around the king piece, looked for it, checked pieces.object_id, completely new board that works with all board functions
+
+    
+    duped = Board.new(false)
+    
+    (0..7).each do |row| ### row
+      (0..7).each do |col| 
+        pos = [row, col]
+        piece = self[pos]
+
+        if piece.is_a?(NullPiece)
+          duped[pos] = NullPiece.instance
+        else
+          duped[pos] = piece.class.new(duped,piece.color,piece.pos)
+        end
+      end
+    end
+
+    duped
   end
   
   def move_piece(start_pos, end_pos)
@@ -49,7 +88,7 @@ class Board
   end
 
   def empty?(pos)  ### PH, might have to amend later when NULL COLOR changes
-    self[pos].color == :null ? true : false
+    self[pos].color == "" ? true : false
   end
 
   def checkmate?(color)

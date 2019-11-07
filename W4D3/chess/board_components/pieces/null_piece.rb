@@ -9,7 +9,7 @@ class NullPiece < Piece
   end
 
   def initialize
-    super(nil, :null, "")
+    super(nil, "", "")
   end
 
   def moves
