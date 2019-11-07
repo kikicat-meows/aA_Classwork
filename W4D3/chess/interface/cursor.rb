@@ -78,14 +78,15 @@ class Cursor
 
   def handle_key(key)
     case key
-    when :return, :space
+    when :space
       @cursor_pos
     when :left, :right, :up, :down
       update_pos(MOVES[key])
       nil
     when :ctrl_c, :escape
       Process.exit(0)
-    else  ### some key maps are not on the handle case, what are we suppose to do with them? #newLine, delete, backspace
+    else
+      puts key  ### some key maps are not on the handle case, what are we suppose to do with them? #newLine, delete, backspace
     end
   end
 

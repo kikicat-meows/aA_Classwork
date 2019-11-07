@@ -1,4 +1,5 @@
 require_relative "pieces"
+require "set"
 
 class Board
   def initialize(populate = true)  
@@ -73,8 +74,26 @@ class Board
   
   def move_piece(start_pos, end_pos)
     raise "Start position not on board, please check your input" if !valid_pos?(start_pos)
-    raise "Target position invalid, please check your input again" if !valid_pos?(end_pos)
-    raise "There is no piece at start_pos" if self[start_pos].color == :null  
+    raise "Target location invalid, please check your input again" if !valid_pos?(end_pos)
+    raise "There is no piece at start_pos" if empty?(start_pos)
+    
+    selected_piece = self[start_pos]
+    
+    # selected_piece.pos = end_pos
+    # self[end_pos], self[start_pos] = selected_piece, NullPiece.instance
+    if !selected_piece.moves.include?(end_pos)
+      raise "The selected piece cannot move to the target location."
+    elsif !selected_piece.valid_moves.include?(end_pos)
+      raise "Invalid move --> this will put you in check."
+    end
+
+    move_piece!(start_pos, end_pos)
+  end
+
+  def move_piece!(start_pos, end_pos)
+    # raise "Start position not on board, please check your input" if !valid_pos?(start_pos)
+    # raise "Target position invalid, please check your input again" if !valid_pos?(end_pos)
+    # raise "There is no piece at start_pos" if self[start_pos].color == :null  
     
     selected_piece = self[start_pos]
 
@@ -91,11 +110,23 @@ class Board
     self[pos].color == "" ? true : false
   end
 
+
+  ### DOESNT WORK RIGHT NOW FOR SLIDEABLE PIECES SOMEHOW? **** NEED TO IMPORT SLIDEABLE
+  ### wouldn't work without slideable in piece.rb
   def checkmate?(color)
     ### determine if player is in check in_check?(color)
+    return false if !in_check?(color)
 
-    ### if player(color) has no more valid moves, then return yes. MUST IMPLEMENT
-    # ==> Piece#move_into_check?(end_pos)
+    # moves = []
+    pieces.each do |piece|
+      next if piece.color != color
+      
+      return false if !piece.valid_moves.empty?
+      
+    end
+    
+    # moves
+    true
   end
 
   def in_check?(color)
