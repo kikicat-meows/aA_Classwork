@@ -62,14 +62,14 @@ end
 
 #2n
 def two_sum?(arr, target_sum)
-  counter = Set.new(0)
-  arr.each do |num|
-    counter << num
+  counter = Hash.new(0)
+  arr.each_with_index do |num, idx|
+    counter[num] = idx
   end
   
-  arr.each do |el|
+  arr.each_with_index do |el, idx|
     res = target_sum - el
-    return true if counter.include?(res)
+    return true if counter.include?(res) && idx != counter[res]
   end
  false
 end
