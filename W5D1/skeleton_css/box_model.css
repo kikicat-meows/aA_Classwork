@@ -1,0 +1,49 @@
+#first-div, #second-div {
+  height: 200px;
+  width: 200px;
+  padding: 50px;
+  border: 5px solid black;
+}
+
+#first-div {
+  background-color: #39cccc;
+
+}
+
+#second-div {
+  background-color: #ff4136;
+  box-sizing: border-box;
+}
+
+p {
+  background-color: #7fdbff;
+}
+
+#text-growth {
+  min-height: 10px;
+  /* height: auto; */
+  /* overflow: auto;  **makes box scrollable */
+}
+
+.image-1-container {
+  background-color: pink;
+  height: 600px;
+  width: 200px;
+}
+  
+  .image-1-container img {
+    width: 100%;
+  }
+
+.image-2-container {
+  background-color: pink;
+  height: 600px;
+  min-width: 200px;
+  /* width: auto; */
+  display: inline-block;
+}
+
+  /* .image-2-container img {
+    width: 100%
+  } */
+  
