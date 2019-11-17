@@ -17,12 +17,17 @@ class Chess
     def play
         # debugger
         until board.checkmate?(@current_player.color)
-            start_pos, end_pos = current_player.make_move(@board)
+            begin
+                start_pos, end_pos = current_player.make_move(@board)
 
-            board.move_piece(start_pos, end_pos)
+                board.move_piece(current_player.color, start_pos, end_pos)
 
-            swap_turn!
-            display.render
+                swap_turn!
+                display.render
+            rescue StandardError
+                retry
+            end
+
         end
 
         puts "Checkmate! #{@current_player.color.to_s} has lost."

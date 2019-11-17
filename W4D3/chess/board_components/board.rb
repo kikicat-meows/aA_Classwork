@@ -71,7 +71,8 @@ class Board
     duped
   end
   
-  def move_piece(start_pos, end_pos)
+  def move_piece(color,start_pos, end_pos)
+    raise "That is not your piece" if color != self[start_pos].color
     raise "Start position not on board, please check your input" if !valid_pos?(start_pos)
     raise "Target location invalid, please check your input again" if !valid_pos?(end_pos)
     raise "There is no piece at start_pos" if empty?(start_pos)
@@ -160,21 +161,20 @@ class Board
   end
   
   ### Clean this up last please
+    
+
+
   def populate_board
-    black_back_row = [
-      Rook.new(self, :black, [0, 0]),
-      Knight.new(self, :black, [0, 1]),
-      Bishop.new(self, :black, [0, 2]),
-      Queen.new(self, :black, [0, 3]),
-      King.new(self, :black, [0, 4]),
-      Bishop.new(self, :black, [0, 5]),
-      Knight.new(self, :black, [0, 6]),
-      Rook.new(self, :black, [0, 7])
-    ]
+    back_row = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
+
+    black_back_row = []
+    back_row.each_with_index do |piece_class, j|
+      black_back_row << piece_class.new(self, :black, [0, j])
+    end
     board[0] = black_back_row
   
     black_front_row = []
-      (0..7).each {|idx| black_front_row << Pawn.new(self, :black, [1, idx])}
+    (0..7).each {|idx| black_front_row << Pawn.new(self, :black, [1, idx])}
     board[1] = black_front_row
   
     (2..5).each do |row|
@@ -182,19 +182,13 @@ class Board
     end
   
     white_front_row = []
-      8.times {|idx| white_front_row << Pawn.new(self, :white, [6, idx])}
+    8.times {|idx| white_front_row << Pawn.new(self, :white, [6, idx])}
     board[6] = white_front_row
   
-    white_back_row = [
-      Rook.new(self, :white, [7, 0]),
-      Knight.new(self, :white, [7, 1]),
-      Bishop.new(self, :white, [7, 2]),
-      Queen.new(self, :white, [7, 3]),
-      King.new(self, :white, [7, 4]),
-      Bishop.new(self, :white, [7, 5]),
-      Knight.new(self, :white, [7, 6]),
-      Rook.new(self, :white, [7, 7]),
-    ]
+    white_back_row = []
+    back_row.each_with_index do |piece_class, j|
+      white_back_row << piece_class.new(self, :white, [7, j])
+    end
     board[7] = white_back_row
   end
 
