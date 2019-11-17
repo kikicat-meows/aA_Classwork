@@ -4,7 +4,6 @@ require "set"
 class Board
   def initialize(populate = true)  
     ##populate to be a boolean method indicating whether if we only want @board space, or if we want to fill it with Pieces as well
-    ##needed to duplicate board (can't do it any other way, would only create 2D array)
 
     ### amend below so that board grid is generated first, before pieces are placed in as we need to pass board information to piece
     @board = Array.new(8) {Array.new(8) {nil} }
@@ -110,9 +109,6 @@ class Board
     self[pos].color == "" ? true : false
   end
 
-
-  ### DOESNT WORK RIGHT NOW FOR SLIDEABLE PIECES SOMEHOW? **** NEED TO IMPORT SLIDEABLE
-  ### wouldn't work without slideable in piece.rb
   def checkmate?(color)
     ### determine if player is in check in_check?(color)
     return false if !in_check?(color)

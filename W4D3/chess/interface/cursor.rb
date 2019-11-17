@@ -86,7 +86,7 @@ class Cursor
     when :ctrl_c, :escape
       Process.exit(0)
     else
-      puts key  ### some key maps are not on the handle case, what are we suppose to do with them? #newLine, delete, backspace
+      puts key  
     end
   end
 

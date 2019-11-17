@@ -17,16 +17,12 @@ class Chess
     def play
         # debugger
         until board.checkmate?(@current_player.color)
-            display.render
-            
-            puts "Player #{current_player.color}, please select a piece: row col"
-            start_pos = @current_player.make_move
-
-            puts "Where would you like to place it? row col"
-            end_pos = @current_player.make_move
+            start_pos, end_pos = current_player.make_move(@board)
 
             board.move_piece(start_pos, end_pos)
+
             swap_turn!
+            display.render
         end
 
         puts "Checkmate! #{@current_player.color.to_s} has lost."
