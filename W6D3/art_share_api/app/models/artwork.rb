@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: artworks
+#
+#  id         :bigint           not null, primary key
+#  img_url    :string           not null
+#  title      :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  artist_id  :integer          not null
+#
+# Indexes
+#
+#  index_artworks_on_artist_id            (artist_id)
+#  index_artworks_on_title_and_artist_id  (title,artist_id) UNIQUE
+#
+
 class Artwork < ApplicationRecord
   # validates_uniqueness_of :artist_id, :scope => [:title]
   validates :artist_id, uniqueness: {scope: :title}
@@ -15,4 +32,15 @@ class Artwork < ApplicationRecord
     dependent: :destroy
 
   has_many :viewers, through: :artworks_shared, source: :viewer
+
+  has_many :comments,
+    primary_key: :id,
+    foreign_key: :artwork_id,
+    class_name: 'Comment',
+    dependent: :destroy
+
+  has_many :commenters,
+    through: :comments,
+    source: :author
+
 end

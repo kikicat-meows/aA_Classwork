@@ -1,8 +1,12 @@
 class UsersController < ApplicationController
 
   def index
-    users = User.all
-
+    if params.has_key?(:search_user)
+      search = params[:search_user].to_s
+      users = User.where("username LIKE '%#{search}%'")
+    else
+      users = User.all
+    end
     render json: users
   end
 
@@ -40,6 +44,17 @@ class UsersController < ApplicationController
   end
 
   private
+
+    params = ActionController::Parameters.new({
+      user: {
+        username: "",
+        search_user: ""
+      }
+    })
+
+    def search
+      params.require(:user).permit(:search_user)
+    end
 
     def user_params
       params.require(:user).permit(:username)

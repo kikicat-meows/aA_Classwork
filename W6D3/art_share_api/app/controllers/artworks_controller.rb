@@ -1,18 +1,14 @@
 class ArtworksController < ApplicationController
 
   def index
-    # artworks = Artwork.all
-
-    # render json: artworks
-    # artworks = Artwork.where(artist_id: params[:user_id])
-    #           .or(Artwork.joins(:viewers).where(artwork_shares: {viewer_id: params[:user_id]}))
-    ###
-
-    artworks_owned = Artwork.where(artist_id: params[:user_id])
-    artworks_shared = Artwork.joins(:viewers).where(artwork_shares: {viewer_id: params[:user_id]})
-
-    render json: { artworks_owned: artworks_owned, artworks_shared: artworks_shared }, status: :ok
-
+    if params.has_key?(:user_id) 
+      artworks_owned = Artwork.where(artist_id: params[:user_id])
+      artworks_shared = Artwork.joins(:viewers).where(artwork_shares: {viewer_id: params[:user_id]})
+      render json: { artworks_owned: artworks_owned, artworks_shared: artworks_shared }, status: :ok
+    else
+      artworks = Artwork.all
+      render json: artworks
+    end
   end
 
   # def user_index

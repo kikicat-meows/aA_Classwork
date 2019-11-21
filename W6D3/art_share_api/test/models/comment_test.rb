@@ -1,22 +1,23 @@
 # == Schema Information
 #
-# Table name: artwork_shares
+# Table name: comments
 #
 #  id         :bigint           not null, primary key
+#  body       :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  artwork_id :integer          not null
-#  viewer_id  :integer          not null
+#  author_id  :integer          not null
 #
 # Indexes
 #
-#  index_artwork_shares_on_artwork_id                (artwork_id)
-#  index_artwork_shares_on_viewer_id_and_artwork_id  (viewer_id,artwork_id) UNIQUE
+#  index_comments_on_artwork_id  (artwork_id)
+#  index_comments_on_author_id   (author_id)
 #
 
 require 'test_helper'
 
-class ArtworkShareTest < ActiveSupport::TestCase
+class CommentTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
