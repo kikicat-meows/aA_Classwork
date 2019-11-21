@@ -11,9 +11,6 @@ class ArtworksController < ApplicationController
     end
   end
 
-  # def user_index
-  # end
-
   def create
     artwork = Artwork.new(artwork_params)
 
@@ -47,7 +44,29 @@ class ArtworksController < ApplicationController
     render json: {}
   end
 
+  def set_favorite
+    artwork = Artwork.find(params[:id])
+    # debugger
+    if artwork.favorite.nil?
+      artwork.update_column(:favorite, true)
+    end
+    render json: artwork
+  end
+
+  def remove_favorite
+    artwork = Artwork.find(params[:id])
+    if !artwork.favorite.nil?
+      artwork.update_column(:favorite, "")
+    end
+    render json: artwork
+  end
+
   private
+    params = ActionController::Parameters.new({
+      artwork: {
+        favorite: ""
+      }
+    })
 
     def artwork_params
       params.require(:artwork).permit(:title, :img_url, :artist_id)

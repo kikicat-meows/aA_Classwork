@@ -3,6 +3,7 @@
 # Table name: artwork_shares
 #
 #  id         :bigint           not null, primary key
+#  favorite   :boolean
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  artwork_id :integer          not null

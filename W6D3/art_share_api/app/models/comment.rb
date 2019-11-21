@@ -30,10 +30,8 @@ class Comment < ApplicationRecord
       foreign_key: :artwork_id,
       class_name: 'Artwork'
 
+  has_many :likes, as: :likeable, dependent: :destroy
 
-
-
+  has_many :users_liked, through: :likes, source: :user
     
-
-
 end

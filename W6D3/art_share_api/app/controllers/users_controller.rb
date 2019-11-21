@@ -47,7 +47,6 @@ class UsersController < ApplicationController
 
     params = ActionController::Parameters.new({
       user: {
-        username: "",
         search_user: ""
       }
     })

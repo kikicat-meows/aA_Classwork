@@ -3,6 +3,7 @@
 # Table name: artworks
 #
 #  id         :bigint           not null, primary key
+#  favorite   :boolean
 #  img_url    :string           not null
 #  title      :string           not null
 #  created_at :datetime         not null
@@ -42,5 +43,9 @@ class Artwork < ApplicationRecord
   has_many :commenters,
     through: :comments,
     source: :author
+
+  has_many :likes, as: :likeable, dependent: :destroy
+
+  has_many :users_liked, through: :likes, source: :user
 
 end

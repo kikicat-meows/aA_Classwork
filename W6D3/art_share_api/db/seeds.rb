@@ -19,10 +19,13 @@ ArtworkShare.create(artwork_id: 2, viewer_id: 5)
 ArtworkShare.create(artwork_id: 1, viewer_id: 4)
 ArtworkShare.create(artwork_id: 4, viewer_id: 1)
 
-
-
 Comment.create(artwork_id: 1, author_id: 1, body: 'Nahhhhhhhhh no snow')
 Comment.create(artwork_id: 3, author_id: 3, body: 'Walker away')
 Comment.create(artwork_id: 2, author_id: 2, body: 'Mine is the best')
 Comment.create(artwork_id: 4, author_id: 4, body: 'woooooof')
 Comment.create(artwork_id: 2, author_id: 5, body: 'moooo')
+
+Like.create(user_id: 1, likeable_id: 3, likeable_type: "Artwork")
+Like.create(user_id: 1, likeable_id: 2, likeable_type: "Comment")
+Like.create(user_id: 2, likeable_id: 2, likeable_type: 'Comment')
+Like.create(user_id: 4, likeable_id: 4, likeable_type: 'Artwork')

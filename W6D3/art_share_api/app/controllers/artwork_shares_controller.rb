@@ -24,8 +24,30 @@ class ArtworkSharesController < ApplicationController
     render json: {}
   end
 
+  def set_favorite
+    share = ArtworkShare.find(params[:id])
+    # debugger
+    if share.favorite.nil?
+      share.update_column(:favorite, true)
+    end
+    render json: share
+  end
+
+  def remove_favorite
+    share = ArtworkShare.find(params[:id])
+    if !share.favorite.nil?
+      share.update_column(:favorite, "")
+    end
+    render json: share
+  end
 
   private
+
+  params = ActionController::Parameters.new({
+    artwork_share: {
+      favorite: ""
+    }
+  })
 
   def share_params
     params.require(:artwork_share).permit(:viewer_id, :artwork_id)
