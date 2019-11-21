@@ -15,6 +15,9 @@ Rails.application.routes.draw do
     resources :comments, only: [:index] do
       resources :likes, only: [:index]
     end
+
+    ### user's artwork collection
+    resources :artwork_collections, only: [:index]
   end
 
   ### artworks
@@ -56,6 +59,8 @@ Rails.application.routes.draw do
   ### likes
   resources :likes, only: [:create, :destroy]
 
+  ### artwork collections
+  resources :artwork_collections, only: [:create, :destroy]
 end
 
 

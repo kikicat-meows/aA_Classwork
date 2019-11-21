@@ -39,7 +39,11 @@ class User < ApplicationRecord
     through: :comments,
     source: :artwork
 
-  
+  has_many :artwork_collections,
+    primary_key: :id,
+    foreign_key: :user_id,
+    class_name: :ArtworkCollection
 
+  has_many :collected_artworks, through: :artwork_collections, source: :artwork
 
 end

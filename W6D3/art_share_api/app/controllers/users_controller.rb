@@ -51,9 +51,9 @@ class UsersController < ApplicationController
       }
     })
 
-    def search
-      params.require(:user).permit(:search_user)
-    end
+    # def search
+    #   params.require(:user).permit(:search_user)
+    # end
 
     def user_params
       params.require(:user).permit(:username)
