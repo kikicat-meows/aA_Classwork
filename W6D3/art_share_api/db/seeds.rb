@@ -18,6 +18,7 @@ ArtworkShare.create(artwork_id: 2, viewer_id: 3)
 ArtworkShare.create(artwork_id: 2, viewer_id: 5)
 ArtworkShare.create(artwork_id: 1, viewer_id: 4)
 ArtworkShare.create(artwork_id: 4, viewer_id: 1)
+ArtworkShare.create(artwork_id: 1, viewer_id: 1)
 
 Comment.create(artwork_id: 1, author_id: 1, body: 'Nahhhhhhhhh no snow')
 Comment.create(artwork_id: 3, author_id: 3, body: 'Walker away')

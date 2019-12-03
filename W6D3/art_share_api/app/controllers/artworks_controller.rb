@@ -5,6 +5,8 @@ class ArtworksController < ApplicationController
       artworks_owned = Artwork.where(artist_id: params[:user_id])
       artworks_shared = Artwork.joins(:viewers).where(artwork_shares: {viewer_id: params[:user_id]})
       render json: { artworks_owned: artworks_owned, artworks_shared: artworks_shared }, status: :ok
+      # artworks_owned += artworks_shared
+      # render json: artworks_owned
     else
       artworks = Artwork.all
       render json: artworks

@@ -1,0 +1,16 @@
+
+
+<div>
+<h1>All of the cats in the world</h1>
+<div class="create">
+  <a href="<%= new_cat_url %>">Add Cat</a>+
+</div>
+<% @cats.each do |cat| %>
+  <div>
+    <%= render 'cat', cat: cat, action: :index %>
+  </div>
+<% end %>
+</div>
+
+
+

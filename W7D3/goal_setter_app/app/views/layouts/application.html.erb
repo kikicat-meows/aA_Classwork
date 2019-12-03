@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GoalSetterApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+    <header>
+      <% if logged_in? %>
+        <h1>Hello, <%= current_user.username.capitalize %></h1>
+
+        <div>
+          <form action="<%= session_url %>" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <%= auth_token %>
+            <input type="submit" value="LOG OUT">        
+          </form>
+        </div>
+      <% else %>
+        <div>
+          <form action="<%= new_user_url %>" method="GET">
+            <%= auth_token %>
+            <input type="submit" value="SIGN UP">        
+          </form>
+          <form action="<%= new_session_url %>" method="GET">
+            <%= auth_token %>
+            <input type="submit" value="LOG IN">        
+          </form>
+        </div>
+      <% end %>
+    </header>
+
+    <div>
+      <% if flash[:errors] %>
+        <ul>
+          <% flash[:errors].each do |error| %>
+          <li><%= error %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+
+    <%= yield %>
+  </body>
+</html>

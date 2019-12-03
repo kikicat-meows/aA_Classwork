@@ -1,0 +1,75 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ 
+
+.clearfix:after {visibility: hidden; display: block; font-size: 0; content: 
+; clear: both; height: 0; }
+
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+.wrapper {
+    width: 1280px;
+    margin: auto;
+}
+
+.header {
+    display: flex;
+    background: #000000;
+    color: #ffffff;
+}
+
+    .logo {
+        width: 80%;
+        padding: 0 10px;
+    }
+
+        .logo img {
+            height: 100px;
+            width: 100px;
+        }
+
+
+    .welcome {
+        width: 10%;
+        margin: auto;
+    }
+
+    .nav-buttons {
+        width: 10%;
+        margin: auto;
+        display: flex;
+        justify-content: flex-end;
+        padding: 0 10px;
+    }
+
+.content {
+    display: flex;
+}
+
+    main {
+        width: 75%;
+        margin: 20px 0;
+        border: 1px solid lightgray;
+        padding: 10px;
+    }
+
+    aside {
+        width: 25%;
+        margin: 20px 0;
+        margin-left: 20px;
+        border: 1px solid lightgray;
+        padding: 10px;
+    }

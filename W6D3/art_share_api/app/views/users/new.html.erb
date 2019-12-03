@@ -1,0 +1,10 @@
+<h2>Add User</h2>
+
+<!-- action is the url where we want to send the data -->
+
+<form action="<%= users_url %>" method="post">
+    <label for="username">username</label>
+    <input type="text" id="username" name="user[username]">
+
+    <input type="submit" value="add user">
+</form>

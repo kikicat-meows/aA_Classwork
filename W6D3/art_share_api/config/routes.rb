@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   ### users
-  resources :users, only: [:index, :create, :show, :update, :destroy] do
+  resources :users, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
     ### search for artwork through user_id
     resources :artworks, only: [:index] do
       resources :comments, only: [:index] do

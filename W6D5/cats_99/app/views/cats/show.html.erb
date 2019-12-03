@@ -1,0 +1,30 @@
+<h1> <%= @cat.name %> </h1>
+
+
+<% attr_names = ["age", "birth_date", "color", "sex"] %>
+<% attributes = [@cat.age, @cat.birth_date, @cat.color, @cat.sex] %>
+
+<table>
+    <thead>
+        <tr>
+            <th colspan="1">Attribute</th>
+            <th colspan="1">Value</th>
+        </tr>
+    </thead>
+    <tbody>
+      <% attr_names.length.times do |idx| %>
+        <tr>
+          <td><%= attr_names[idx] %></td>
+          <td><%= attributes[idx] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+</table>
+<p><a href="<%= edit_cat_url(@cat) %>">Edit <%= @cat.name %></a></p>
+
+
+
+<h3><a href="<%= cats_url %>">Back to All Cats</a></h3>
+
+
+
